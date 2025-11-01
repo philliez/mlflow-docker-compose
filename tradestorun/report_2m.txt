@@ -1,0 +1,3 @@
+Model: btcusdt_win_loss_2m_model.keras
+Data: 2 month(s)
+Validation Accuracy: 0.7972

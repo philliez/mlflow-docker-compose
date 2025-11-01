@@ -1,0 +1,22 @@
+# Ignore virtual environment
+venv/
+__pycache__/
+
+# Ignore data files
+*.zip
+*.csv
+*.npz
+*.parquet
+*.joblib
+
+# Ignore MLflow and log files
+mlruns/
+tradestorun/logs/
+
+# Ignore other files
+*.pyc
+*.py.save
+*.log
+*.DS_Store
+*~
+.env
