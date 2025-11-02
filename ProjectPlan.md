@@ -13,3 +13,7 @@ This plan outlines the steps to enhance the feature engineering process and inco
 ## Utility Scripts
 
 - [x] **Create `run_mlflow_server.py`:** A script to start the MLflow UI without Docker Compose.
+
+## MLflow Enhancements
+
+- [x] **Enhance MLflow Tracking:** Improve the training script to track datasets, log more parameters, and generate performance charts.
