@@ -1,9 +1,10 @@
 import subprocess
 import os
+import argparse
 
-def run_mlflow_server():
+def run_mlflow_server(host):
     mlruns_path = os.path.join(os.getcwd(), "mlruns")
-    command = f"mlflow ui --backend-store-uri {mlruns_path} --port 5000"
+    command = f"mlflow ui --backend-store-uri {mlruns_path} --port 5000 --host {host}"
     print(f"Starting MLflow UI with command: {command}")
     try:
         subprocess.run(command, shell=True, check=True)
@@ -15,4 +16,7 @@ def run_mlflow_server():
         print("Error: 'mlflow' command not found. Please ensure MLflow is installed and in your PATH.")
 
 if __name__ == "__main__":
-    run_mlflow_server()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", type=str, default="127.0.0.1", help="The host to bind the MLflow UI to.")
+    args = parser.parse_args()
+    run_mlflow_server(args.host)

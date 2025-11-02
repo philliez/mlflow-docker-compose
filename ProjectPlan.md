@@ -29,6 +29,7 @@ This plan outlines the steps to develop and track XGBoost-based trading models f
 ## Utility Scripts
 
 - [x] **Create `run_mlflow_server.py`:** A script to start the MLflow UI without Docker Compose.
+    - [x] **Add `--host` argument:** The script now accepts a `--host` argument to allow connections from ngrok.
 
 ## Colab Integration
 
