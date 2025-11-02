@@ -33,3 +33,4 @@ This plan outlines the steps to develop and track XGBoost-based trading models f
 ## Colab Integration
 
 - [x] **Update `COLAB_INSTRUCTIONS.md`:** The instructions have been updated with the user's ngrok URL and authtoken.
+- [x] **Create `colab_runner.ipynb`:** A Colab notebook has been created to run the training pipeline, with checks for mounted drive and installed dependencies.
