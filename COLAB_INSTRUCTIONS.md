@@ -10,7 +10,15 @@ To allow Colab to access your local MLflow server, you need to expose it to the 
 
 If you don't have ngrok, you can download it from [ngrok.com](https://ngrok.com/download).
 
-### b. Run Your MLflow Server
+### b. Configure ngrok Authtoken
+
+Before using ngrok, you need to configure it with your authtoken. You only need to do this once.
+
+```bash
+ngrok config add-authtoken 34tqkL02OcDDXoiUV9JQX9UVF2m_3fTVKxdvi4wmc5CyAYmwr
+```
+
+### c. Run Your MLflow Server
 
 Start your MLflow server as you normally would. For example, using the script we created:
 
@@ -20,7 +28,7 @@ Start your MLflow server as you normally would. For example, using the script we
 
 This will start the MLflow UI on `http://127.0.0.1:5000`.
 
-### c. Expose the Server with ngrok
+### d. Expose the Server with ngrok
 
 In a new terminal, run the following command to expose your local port 5000 to the internet:
 
@@ -28,13 +36,13 @@ In a new terminal, run the following command to expose your local port 5000 to t
 ngrok http 5000
 ```
 
-Ngrok will give you a public URL (e.g., `https://<random-string>.ngrok.io`). This is the URL you will use to connect from Colab.
+Ngrok will give you a public URL. Use the one provided to you: `https://untrying-noninterpretatively-skyla.ngrok-free.dev`.
 
 ## 2. Run the Training Script on Colab
 
 ### a. Upload Your Project to Google Drive
 
-Upload your entire project directory to your Google Drive. This will make it easy to access your files from Colab.
+Upload your entire project directory, including the `ohlc_data.zip` file, to your Google Drive. This will make it easy to access your files from Colab.
 
 ### b. Create a New Colab Notebook
 
@@ -64,8 +72,8 @@ import os
 project_path = '/content/drive/MyDrive/mlflow-docker-compose'
 os.chdir(project_path)
 
-# --- Replace with your ngrok URL ---
-ngrok_url = 'https://<random-string>.ngrok.io'
+# --- Your ngrok URL ---
+ngrok_url = 'https://untrying-noninterpretatively-skyla.ngrok-free.dev'
 
 !python tradestorun/2_train_model.py --mlflow-tracking-uri {ngrok_url}
 ```

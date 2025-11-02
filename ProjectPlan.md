@@ -2,12 +2,15 @@
 
 This plan outlines the steps to develop and track XGBoost-based trading models for creating Freqtrade strategies.
 
-- [ ] **1. Unzip the data:** The first step is to unzip the `2_month_data.zip` file to access the raw data.
-- [ ] **2. Consolidate and process data:** Create a script to consolidate the data from June, July, and August, and then process it into a single, usable format.
-- [ ] **3. Enhance Feature Engineering:** Improve the `feature_engineer.py` script to create more informative features.
-- [ ] **4. Update Prediction Script:** Adjust the `3_predict_and_evaluate.py` script to work with the new XGBoost model and features.
-- [ ] **5. Run the pipeline:** Execute the complete pipeline to train the new model and generate predictions.
-- [ ] **6. Evaluate and commit:** Analyze the results and, if satisfactory, commit the changes to version control.
+- [ ] **1. Enhance Feature Engineering:** Improve the `feature_engineer.py` script to create more informative features.
+- [ ] **2. Update Prediction Script:** Adjust the `3_predict_and_evaluate.py` script to work with the new XGBoost model and features.
+- [ ] **3. Run the pipeline:** Execute the complete pipeline to train the new model and generate predictions.
+- [ ] **4. Evaluate and commit:** Analyze the results and, if satisfactory, commit the changes to version control.
+
+## Data Management
+
+- [x] **Compress OHLC Data:** All OHLC CSV data has been compressed into `ohlc_data.zip` to reduce the repository size.
+- [x] **Update Data Processing Script:** The `1_consolidate_and_process.py` script has been updated to read data directly from the `ohlc_data.zip` file.
 
 ## Model Training
 
@@ -29,5 +32,4 @@ This plan outlines the steps to develop and track XGBoost-based trading models f
 
 ## Colab Integration
 
-- [x] **Create `COLAB_INSTRUCTIONS.md`:** Instructions on how to connect a Google Colab notebook to the local MLflow server using ngrok.
-
+- [x] **Update `COLAB_INSTRUCTIONS.md`:** The instructions have been updated with the user's ngrok URL and authtoken.
