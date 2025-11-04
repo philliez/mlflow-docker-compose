@@ -1,0 +1,127 @@
+# XGBoost Model Training Summary
+
+This report summarizes the feature engineering and training process for the XGBoost models.
+
+## Feature Engineering (`tradestorun/feature_engineer.py`)
+
+The feature engineering process involves calculating a variety of technical indicators. The base features are `open`, `high`, `low`, `close`, `volume`, `histogram`, `signal`, and `macd`.
+
+The following indicators are calculated and added to the feature set:
+- Simple Moving Averages (SMA) for 5 and 10 periods on the 'close' price.
+- Candle Body Size.
+- Relative Strength Index (RSI) with a window of 14.
+- Lagged 'close' price features for 1 to 5 periods.
+- Bollinger Bands with a window of 20 and 2 standard deviations.
+- Stochastic Oscillator with a window of 14.
+- Average True Range (ATR) with a window of 14.
+- MACD with fast, slow, and signal periods of 12, 26, and 9 respectively.
+- Ichimoku Cloud.
+- ADX with a window of 14.
+
+Rows with NaN values after feature engineering are dropped.
+
+## Model Training (`tradestorun/2_train_model.py`)
+
+The script trains an `xgboost.XGBClassifier` model.
+
+- **Enabled Indicators by Default:**
+  - "rsi": True
+  - "stoch": True
+  - "adx": True
+  - "bbands": True
+- **Data Splitting:** The data is split into training and validation sets with a 80/20 ratio, without shuffling.
+- **Feature Scaling:** `StandardScaler` is used to scale the features.
+- **XGBoost Parameters:**
+  - objective: 'binary:logistic'
+  - eval_metric: 'logloss'
+  - use_label_encoder: False
+  - n_estimators: 1000
+  - learning_rate: 0.05
+  - max_depth: 5
+  - subsample: 0.8
+  - colsample_bytree: 0.8
+  - gamma: 0.1
+- **Early Stopping:** The training uses early stopping with 50 rounds to prevent overfitting.
+- **MLflow Tracking:** The script is instrumented with MLflow to log parameters, metrics, and artifacts, including the model, scaler, classification report, confusion matrix, and feature importance.
+
+## Training Run Summaries
+
+There were four training runs in the experiment `723660537517662986`. All runs used the same parameters.
+
+### Run 1: `gifted-grub-744` (ID: `0430fb03272b4b15911d0e38fcec2737`)
+- **Start Time:** 1761871308873
+- **End Time:** 1761871353875
+- **Accuracy:** 0.6778523489932886
+
+### Run 2: `popular-zebra-96` (ID: `1616d33c93044f3aa24e33fc98587866`)
+- **Start Time:** 1761871041115
+-
+- **End Time:** 1761871079493
+- **Accuracy:** 0.6778523489932886
+
+### Run 3: `inquisitive-dove-101` (ID: `1e844ef5609c4d66882d713a8e6ac3db`)
+- **Start Time:** 1761871106274
+- **End Time:** 1761871143446
+- **Accuracy:** 0.6778523489932886
+
+### Run 4: `clean-stork-432` (ID: `dea5219ebde84e34a0710b6cb1a05a18`)
+- **Start Time:** 1761871377201
+- **End Time:** 1761871413885
+- **Accuracy:** 0.6778523489932886
+
+## Last Run Details (ID: `dea5219ebde84e34a0710b6cb1a05a18`)
+
+### Classification Report
+```json
+{
+    "0.0": {
+        "precision": 0.526829268292683,
+        "recall": 0.7039473684210527,
+        "f1-score": 0.602803738317757,
+        "support": 152.0
+    },
+    "1.0": {
+        "precision": 0.8028169014084507,
+        "recall": 0.6551724137931034,
+        "f1-score": 0.7215189873417721,
+        "support": 174.0
+    },
+    "accuracy": 0.6778523489932886,
+    "macro avg": {
+        "precision": 0.6648230848505669,
+        "recall": 0.679559891107078,
+        "f1-score": 0.6621613628297645,
+        "support": 326.0
+    },
+    "weighted avg": {
+        "precision": 0.6738154898348902,
+        "recall": 0.6778523489932886,
+        "f1-score": 0.665931195392322,
+        "support": 326.0
+    }
+}
+```
+
+### Top 20 Feature Importances
+| feature | importance |
+|---|---|
+| histogram_t370 | 0.020550523 |
+| high_t43 | 0.017837374 |
+| SMA_5_close_t416 | 0.016950352 |
+| SMA_5_close_t428 | 0.01647896 |
+| close_lag_1_t69 | 0.016394142 |
+| volume_t226 | 0.016360324 |
+| volume_t212 | 0.015846234 |
+| RSI_14_t465 | 0.014607356 |
+| low_t431 | 0.01431726 |
+| close_t456 | 0.014238793 |
+| low_t147 | 0.012050568 |
+| close_lag_2_t68 | 0.011744171 |
+| high_t238 | 0.01130313 |
+| open_t9 | 0.011278769 |
+| open_t53 | 0.011258427 |
+| volume_t289 | 0.011027248 |
+| signal_t202 | 0.0110102305 |
+| signal_t298 | 0.010659548 |
+| SMA_5_close_t316 | 0.0106458645 |
+| open_t6 | 0.010622054 |
